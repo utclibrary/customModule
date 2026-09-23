@@ -108,7 +108,51 @@ There are two options for setting up your local development environment: configu
     }
 
     export const PROXY_TARGET = environments['example'];
+  ## Building the special collections Alma package
+
+  Special collections homepage assets belong in the special collections template package, not in the shared `src/` code. Keep the background image at:
+
+  ```text
+  template_package/special-collections/assets/homepage/homepage_background.svg
+  ```
+
+  The SVG may contain an embedded JPG or PNG image. The package configuration is stored in `configs/special-collections.env`:
+
+  ```env
+  INST_ID=01UTC_INST
+  VIEW_ID=01UTC_SPECIAL
+  VIEW_PACKAGE_DIR=template_package/special-collections
+  ```
+
+  Use the exact `VIEW_ID` configured in Alma. Build only the special collections package with:
+
+  ```bash
+  ENV_FILE=configs/special-collections.env ./package-alma.sh
+  ```
+
+  The resulting package is:
+
+  ```text
     ```
+  ```
+
+  Verify that the homepage background is included under the special collections view:
+
+  ```bash
+  unzip -l dist/01UTC_INST-01UTC_SPECIAL-alma.zip \
+    | grep homepage_background
+  ```
+
+  The output should include:
+
+  ```text
+  01UTC_SPECIAL/assets/homepage/homepage_background.svg
+  ```
+
+  Upload this ZIP to the customization package for the special collections view only. The standard and stacks packages are not affected.
+
+  ---
+
   - Start the development server with the configured proxy by running:
     ```bash
     npm run start:proxy

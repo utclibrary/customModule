@@ -39,7 +39,7 @@
 
 			],
 			"scripts": [],
-			"extraWebpackConfig": "webpack.config.js",
+			"extraWebpackConfig": "./webpack.prod.config.js",
 			"commonChunk": false
 		  },
 		  "configurations": {
@@ -57,7 +57,7 @@
 				}
 			  ],
 			  "outputHashing": "all",
-			  "extraWebpackConfig": "webpack.prod.config.js"
+			  "extraWebpackConfig": "./webpack.prod.config.js"
 			},
 			"development": {
 			  "buildOptimizer": false,
